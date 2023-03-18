@@ -71,7 +71,9 @@ jobs:
         id: auth
         uses: 'google-github-actions/auth@v0'
         with:
-          workload_identity_provider: 'projects/392272478263/locations/global/workloadIdentityPools/github-develop-pool'
+          workload_identity_provider: 'projects/392272478263/locations/global/workloadIdentityPools/github-develop-pool/providers/my-provider-name'
+          # iam.googleapis.com/projects/<project-number>/locations/global/workloadIdentityPools/<pool-id>/providers/<provider-id>
+          # workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
 
       # NOTE: Alternative option - authentication via credentials json
