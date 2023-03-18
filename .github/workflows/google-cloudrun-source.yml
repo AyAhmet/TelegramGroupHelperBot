@@ -51,9 +51,9 @@ on:
     branches: [ "develop" ]
 
 env:
-  PROJECT_ID: 392272478263
-  SERVICE: testbot@endpoint-test-telegram.iam.gserviceaccount.com
-  REGION: europe-west1
+  PROJECT_ID: 'endpoint-test-telegram'
+  SERVICE: 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
+  REGION: 'europe-west1'
 
 jobs:
   deploy:
@@ -84,7 +84,7 @@ jobs:
           runtime: 'python39'
           entry_point: 'entry'
           env_vars_file: 'env.yaml'
-          project_id: '392272478263'
+          project_id: ${{ env.PROJECT_ID }}
           memory_mb: '1024'
           service_account_email: ${{ env.SERVICE }}
           
