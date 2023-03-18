@@ -1,25 +1,27 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - 'functions'
-  - 'deploy'
-  - 'telegram-test'
-  - 'gen2'
-  - 'region'
-  - 'europe-west1'
-  - 'runtime'
-  - 'python39'
-  - 'trigger-http'
-  - 'env-vars-file'
-  - 'env.yaml'
-  - 'project'
-  - 'endpoint-test-telegram'
-  - 'memory'
-  - '1024M'
-  - 'entry-point'
-  - 'entry'
-  - 'service-account'
-  - 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
+  args: [ 'functions', 'deploy', 'telegram-test', 'gen2', 'region=europe-west1', 'runtime=python39', 'trigger-http', 'env-vars-file', 'env.yaml', 'project=endpoint-test-telegram', 'memory', '1024M', 'entry-point=entry', 'service-account=testbot@endpoint-test-telegram.iam.gserviceaccount.com']
+
+#  args:
+#  - 'functions'
+#  - 'deploy'
+#  - 'telegram-test'
+#  - 'gen2'
+#  - 'region'
+#  - 'europe-west1'
+#  - 'runtime'
+#  - 'python39'
+#  - 'trigger-http'
+#  - 'env-vars-file'
+#  - 'env.yaml'
+#  - 'project'
+#  - 'endpoint-test-telegram'
+#  - 'memory'
+#  - '1024M'
+#  - 'entry-point'
+#  - 'entry'
+#  - 'service-account'
+#  - 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
 
 # cloud functions deploy telegram-test --gen2 --region=europe-west1 --runtime=python39 --trigger-http
 # --env-vars-file env.yaml --project=endpoint-test-telegram --memory 1024M --timeout=1m --entry-point=entry
