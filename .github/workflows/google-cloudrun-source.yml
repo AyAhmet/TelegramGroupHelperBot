@@ -44,7 +44,7 @@
 #   Cloud Run builds from source        - https://cloud.google.com/run/docs/deploying-source-code
 #   Principle of least privilege        - https://cloud.google.com/blog/products/identity-security/dont-get-pwned-practicing-the-principle-of-least-privilege
 
-name: Deploy to Cloud Run from Source
+name: Deploy to Cloud Function from Source
 
 on:
   push:
@@ -71,8 +71,8 @@ jobs:
         id: auth
         uses: 'google-github-actions/auth@v0'
         with:
-          workload_identity_provider: 'projects/392272478263/locations/global/workloadIdentityPools/github-develop-pool' # e.g. - projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider
-          service_account: 'testbot@endpoint-test-telegram.iam.gserviceaccount.com' # e.g. - my-service-account@my-project.iam.gserviceaccount.com
+          workload_identity_provider: 'projects/392272478263/locations/global/workloadIdentityPools/github-develop-pool'
+          service_account: 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
 
       # NOTE: Alternative option - authentication via credentials json
       # - name: Google Auth
@@ -83,12 +83,19 @@ jobs:
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloud-functions@v1
         with:
+          name: 'telegram-test'
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
-          # NOTE: If required, update to the appropriate source folder
           source: ./
+          runtime: 'python39'
+          entry_point: 'entry'
+          env_vars_file: 'env.yaml'
+          project_id: '392272478263'
+          memory_mb: '1024'
+          service_account_email: 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
+          
 
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
