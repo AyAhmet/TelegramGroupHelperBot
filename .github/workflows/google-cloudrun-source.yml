@@ -86,15 +86,14 @@ jobs:
         uses: google-github-actions/deploy-cloud-functions@v1
         with:
           name: 'telegram-test'
-          service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
-          source: ./
+          source_dir: ./
           runtime: 'python39'
           entry_point: 'entry'
           env_vars_file: 'env.yaml'
           project_id: '392272478263'
           memory_mb: '1024'
-          service_account_email: 'testbot@endpoint-test-telegram.iam.gserviceaccount.com'
+          service_account_email: ${{ env.SERVICE }}
           
 
       # If required, use the Cloud Run url output in later steps
