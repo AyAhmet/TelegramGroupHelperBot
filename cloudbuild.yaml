@@ -1,0 +1,3 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [ 'functions', 'deploy', 'telegram-test', '--gen2', '--region=europe-west1', '--runtime=python39', '--trigger-http', '--env-vars-file', 'env.yaml', '--project=telegram-group-helper-bot', '--memory', '1024M', '--entry-point=entry', '--service-account=532036984604-compute@developer.gserviceaccount.com']
